@@ -9,7 +9,7 @@ export interface OrderConfirmedEvent {
   time: string;
   datacontenttype: string;
   data: {
-    orderId: string;
+    id: string;
     status: string;
   };
 }
@@ -24,7 +24,7 @@ export class OrderConfirmedConsumer extends BaseConsumer<OrderConfirmedEvent> {
     try {
       console.log("Received order confirmed event:", data);
       const notification = new Notification({
-        orderId: data.data.orderId,
+        order_id: data.data.id,
         status: data.data.status,
       });
       await notification.save();
